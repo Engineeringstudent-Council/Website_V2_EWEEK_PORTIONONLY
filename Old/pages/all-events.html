@@ -1,0 +1,20 @@
+<div ng-repeat="eventTag in eventTags | filter:customFilter | limitTo:limit">
+        <div class="row">
+            <div class="col-md-6" ng-repeat="event in events | filter:eventTag.name">
+		<h4 style="font-size: 24px;"><b>{{event.name}}</b></h4>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img class="img-thumbnail" src="{{event.imgUrl}}"/>
+                    </div>
+                    <div class="col-xs-8">
+                        <h5><b>Where?</b> {{event.location}}</h5>
+                        <h5><b>When?</b> {{event.day}} {{event.dateTime}}</h5>
+                    </div>
+                </div>
+		<br>
+  		<p>{{event.description}}</p>
+                </div><div class="row">
+            </div>
+
+        </div>
+    </div>
