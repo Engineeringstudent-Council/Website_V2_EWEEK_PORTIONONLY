@@ -1,0 +1,269 @@
+  <!DOCTYPE html>
+  <html lang="en" ng-app="eweekApp">
+  <head>
+      <title>Engineers Week | March 10 - 15, 2014 </title>
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="css/style.css">
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+      <script src="js/app.js"></script>
+      <script src="js/controller.js"></script>
+  </head>
+  <body ng-controller="EventListCtrl">
+
+      <!-- Begin Navigation -->
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+
+          <!-- Mobile Hamburger -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+      	  </div>
+
+      <!-- Regular Nav -->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+          	<a href="#monday" onclick="iconScroll(this.href)">
+          		<div class="row-fluid">
+                      <strong>
+                        Mon
+                    </strong>
+                    <div class="visible-md visible-lg">
+                        <h6>Milk and Cookies<br/>
+                            Dean Drako Keynote<br/>
+                            Showcase</h6>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+             <a href="#tuesday" onclick="iconScroll(this.href)">
+                <div class="row-fluid">
+                  <strong>
+                    Tues
+                </strong>
+                <div class="span6 visible-md visible-lg">
+                    <h6>Breakfast<br/>
+                        Puzzle Hunt<br/>
+                        Berkeley BioLabs Talk</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li>
+         <a href="#wednesday" onclick="iconScroll(this.href)">
+            <div class="row-fluid">
+              <strong>
+                Wed
+            </strong>
+            <div class="span6 visible-md visible-lg">
+                <h6>Breakfast<br/>
+                    Networking<br>
+		    <br></h6>
+                </div>
+            </div>
+        </a>
+    </li>
+    <li>
+     <a href="#thursday" onclick="iconScroll(this.href)">
+        <div class="row-fluid">
+          <strong>
+            Thurs
+        </strong>
+        <div class="span6 visible-md visible-lg">
+            <h6>Duct Taping<br/>
+                Design & Build<br/>
+                Boeing Talk</h6>
+            </div>
+        </div>
+    </a>
+  </li>
+  <li>
+     <a href="#friday" onclick="iconScroll(this.href)">
+        <div class="row-fluid">
+          <strong>
+            Fri
+        </strong>
+        <div class="span6 visible-md visible-lg">
+            <h6>Carnival<br/>
+                Casino Night<br><br></h6>
+            </div>
+        </div>
+    </a>
+  </li>
+  <li>
+     <a href="#saturday" onclick="iconScroll(this.href)">
+        <div class="row-fluid">
+          <strong>
+            Sat
+        </strong>
+        <div class="span6 visible-md visible-lg">
+            <h6>E4K<br><br>
+                    <br></h6>
+        </div>
+    </div>
+  </a>
+  </li>
+  </ul>
+
+  </div>
+  </div><!--/.nav-collapse -->
+  </div>
+  </div>
+
+
+  <!-- Begin Container -->
+  <div class="content container">
+
+      <!-- Hero -->
+      <div class="row">
+          <div class="col-md-14 jumbotron text-center" style="padding-bottom:-100px;">
+
+	      <h2 id="school">UC Berkeley</h2>
+              <h1 id="category">Engineers Week</h1>
+              <h3 id="eventsList"></h3>
+	      <h3 id="date" style="margin-left:250px;">March 10 - 15, 2014</h3>
+	      <h3 style="font-size:16px;margin-top:20px">Thanks to everyone who came out this year! Look out for us next year!</h3>
+
+              <div class="row">
+                  <div class="col-md-2 eventTags text-center hidden-xs" style="margin-top:70px;" ng-repeat="eventTag in eventTags | limitTo: 3">
+                      <a href="#{{eventTag.link}}" onclick="iconScroll(this.href)">
+                      <img class="img-responsive img-circle" style="width:150%;height:auto" src="{{eventTag.imgUrl}}"></a>
+                  </div> 
+
+              <!-- Leaderboard -->
+              <div class="col-md-5" ng-controller="MajorListCtrl" style="padding-left:100px;padding-top:20px;">
+                  <table class="table table-striped">
+		      <caption><b>Interdepartamental Competition Scoreboard</b></caption>
+                      <thead>
+                          <tr>
+                              <th>Rank</th>
+                              <th style="text-align:left;">Major</th>
+                              <th>Score</th>
+                          </tr>
+                      </thead>
+                      <tr ng-repeat="major in majors | orderBy:orderProp | limitTo: limitNum" ng-init="index">
+                          <td>{{$index + 1}}</td>
+                          <td style="text-align:left;">{{major.name}}</td>
+                          <td>{{major.score}}</td>
+                      </tr>
+                  </table>
+              </div>
+
+		  <div class="col-md-2 eventTags text-center hidden-xs" style="margin-top:-180px;margin-left:110px;" ng-repeat="eventTag in eventTags | filter: {name: 'Professional Development'}">
+                      <a href="#{{eventTag.link}}" onclick="iconScroll(this.href)">
+                      <img class="img-responsive img-circle" src="{{eventTag.imgUrl}}">
+                  </div> 
+		 <div class="col-md-2 eventTags text-center hidden-xs" style="margin-top:-180px;margin-left:305px;" ng-repeat="eventTag in eventTags | filter: {name: 'Outreach'}">
+                      <a href="#{{eventTag.link}}" onclick="iconScroll(this.href)">
+                      <img class="img-responsive img-circle" src="{{eventTag.imgUrl}}">
+                  </div>
+
+                  <div class="col-xs-12 eventTags visible-xs" ng-repeat="eventTag in eventTags | limitTo: 5">
+                    <a href="#{{eventTag.link}}" onclick="iconScroll(this.href)">
+                      <div class="row">
+                        <div class="col-xs-3">
+                          <img class="img-responsive img-circle" src="{{eventTag.imgUrl}}">
+                        </div>
+                      </div>
+                    </a>
+                  </div> 
+
+              </div>
+	      <br><br>
+
+              <h5>Weeklong activities to celebrate engineering, to not study, and to enjoy the sunshine!<br>
+
+              Interested in helping in next year's E-Week? Have Questions? Email andreaowu at berkeley.edu</h5>
+          </div>
+         </div>
+
+          <!-- Template Injection -->
+          <div id="schedule"></div>
+	  <div id="events"></div>
+          <div ng-view></div>
+
+          <footer>
+              <h5>Engineers Week is a project of the <a href="http://esc.berkeley.edu">Engineering Student Council</a> of UC Berkeley's <a href="http://coe.berkeley.edu">College of Engineering.</a><br>
+
+              Icons by Gabriela Wantah. Built by Andrea Wu and RJ Sheperd using <a href="http://www.angularjs.org">angular.js</a>.
+          </footer>
+
+      </div> <!-- End Container -->
+
+
+      <script type="text/ng-template" id="/pages/all-events.html">
+      </script>
+
+      <!-- Load scripts at end to be zoom zoom -->
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+      <script>
+	function iconScroll(url) {
+	 var text = url.substring(27);
+	 var activity = "<h3 style='text-align: center;margin-top:18px;font-size:20px;'>- - ";
+         if (text === "speaker") {
+                 text = "Speaker";
+                 activity += "Dean Drako Kickoff - - Closing Remarks";
+             } else if (text === "outreach") {
+                 text = "Outreach";
+                 activity += "Engineering for Kids";
+             } else if (text === "meetEat") {
+                 text = "Meet and Eat";
+                 activity += "Milk and Cookies - - Showcase - - Breakfast - - Carnival - - Casino Night";
+             } else if (text === "compete") {
+                 text = "Compete";
+                 activity += "Puzzle Hunt - - Build & Design - - Duct Taping";
+             } else if (text == "prodev") {
+		 text = "Professional Development";
+		 activity += "Networking";
+	     } else {
+		if (text === "monday") {
+		    text = "Monday";
+		    activity += "Milk and Cookies - - Dean Drako Keynote - - Showcase";
+	     	} else if (text === "tuesday") {
+		    text = "Tuesday";
+		    activity += "Breakfast - - Puzzle Hunt - - Innovations Talk";
+	     	} else if (text === "wednesday") {
+		    text = "Wednesday";
+		    activity += "Breakfast - - Networking";
+		} else if (text === "thursday") {
+		    text = "Thursday";
+		    activity += "Duct Taping - - Design & Build - - Closing Remarks";
+		} else if (text === "friday") {
+		    text = "Friday";
+		    activity += "Carnival - - Casino Night";
+	     	} else {
+		    text = "Saturday";
+		    activity += "E4K";
+	     	}
+	     }
+         $('html,body').animate({
+		scrollTop: $('#schedule').offset().top - 100});
+	 document.getElementById("school").innerHTML = "<br>";
+	 document.getElementById("date").innerHTML = "";
+	 document.getElementById("category").innerHTML = text;
+	 document.getElementById("eventsList").innerHTML = activity + "</h3>";
+
+	 };
+
+      </script>
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=583864148298292";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+  </body>
+  <div id="fb-root"></div>
+  </html>
